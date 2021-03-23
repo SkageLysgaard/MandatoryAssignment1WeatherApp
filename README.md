@@ -4,4 +4,4 @@ People in the team:
 Skage Lysgard
 Sondre Sylte 
 Åsmund Groven
-Tuva kvalsøren
+Tuva Kvalsøren
