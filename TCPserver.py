@@ -1,6 +1,6 @@
 
 import threading
-from socket import socket, AF_INET, SOCK_DGRAM
+from socket import socket, AF_INET, SOCK_STREAM
 #is this tcp? yes/ns
 
 HEADER = 64
@@ -10,7 +10,7 @@ ADDR = (SERVER)
 FORMAT = "utf-8"
 DISCONNECT_MESSAGE = "!DISCONNECT"
 
-server = socket(AF_INET,SOCK_DGRAM)
+server = socket(AF_INET,SOCK_STREAM)
 server.bind(ADDR)
 
 
