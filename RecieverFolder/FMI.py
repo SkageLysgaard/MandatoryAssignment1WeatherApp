@@ -8,10 +8,8 @@ client.connect(("localhost", 5550))
 
 print("connected...")
 location = input("Enter your location: ")
+#sends the location to the server
 client.send(bytes(location, "utf-8"))
-#location = input("Enter location to see weather: ")
-
-
 
 filename = "recieved_data"
 file = open(filename, "wb")

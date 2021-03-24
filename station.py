@@ -142,3 +142,8 @@ class StationSimulator:
         """Current rain."""
         with self._lock:
             return round(self._rain, 2)
+
+
+f = open("weatherinfo.py", "w")
+f.write(str(_days_of_month))
+f.close()
