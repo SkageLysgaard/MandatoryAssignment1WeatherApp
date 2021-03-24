@@ -22,7 +22,8 @@ if __name__ == "__main__":
 
     f = open("bergen.py", "w")
     f.write("temperature\tprecipitation")
-    f.write(str(temperature) + str(precipitation))
+    f.write(str(temperature) + "\n")
+    f.write(str(precipitation))
     f.close()
 
     
