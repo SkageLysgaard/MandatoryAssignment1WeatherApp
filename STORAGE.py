@@ -13,12 +13,17 @@ print("[LISTENING] The server is listening...")
 
 def start():
     while True:
-        conn, addr= socketTCP.accept()
-        _ , UDP_adress = socketUDP.recvfrom(2048)
+        conn, TCP_addr= socketTCP.accept()
+        weatherData , UDP_adress = socketUDP.recvfrom(2048)
         data = conn.recv(1024).decode()
         ct = Thread(conn)
+        encoded = data.encode()
+        #Dersom inputen fra CLI er x:
+        if(encoded == 1):
+            pass
+        #Dersom 
         conn.send(data.encode())
-        print(f'Received message from {addr, UDP_adress}, message: {data}')
+        print(f'Received message from {TCP_addr, UDP_adress}, message: {data}')
         ct.run()
         conn.close()
 
