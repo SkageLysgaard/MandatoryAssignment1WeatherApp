@@ -10,7 +10,7 @@ print("Waiting for ant incomming connections...")
 conn, addr = server.accept()
 location = conn.recv(1024).decode()
 print(addr, "Has connected to the server", location)
-cluster = MongoClient("lim inn url her")
+cluster = MongoClient("mongodb://adminGroven:<12345678!>@weatherstoragedb-shard-00-00.8q1zq.mongodb.net:27017,weatherstoragedb-shard-00-01.8q1zq.mongodb.net:27017,weatherstoragedb-shard-00-02.8q1zq.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-ubvlc6-shard-0&authSource=admin&retryWrites=true&w=majority"))
 database = cluster["cluster"]
 collection = database["collection"]
  
