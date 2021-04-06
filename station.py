@@ -4,12 +4,14 @@ import json
 from time import sleep
 import numpy as np
 from numpy.random import binomial, normal
+import csv
+from csv import writer
 
 from socket import socket, AF_INET, SOCK_DGRAM
 
 
 sock = socket(AF_INET,SOCK_DGRAM)
-sock.connect(("localhost", 5556))
+sock.connect(("localhost", 5560))
 
 
 class StationSimulator:
@@ -157,17 +159,18 @@ if __name__ == "__main__":
    
     bergen_station = StationSimulator(simulation_interval=1)
     bergen_station.turn_on()
-        
+    with open("DATA.txt", "w") as data:
+        List = ["Location", "Month", "Temperature", "Rain"]
+        writer_object = writer(data)
+        writer_object.writerow(List)
     for _ in range(72):
         # Sleep for 1 second to wait for new weather data
         # to be simulated
         sleep(1)
         # Read new weather data and append it to the
         # corresponding list
-        post = {"location":bergen_station.location,"month":bergen_station.month, "temperature":bergen_station.temperature, "rain":bergen_station.rain}
+        post = [{bergen_station.location},bergen_station.month, bergen_station.temperature,bergen_station.rain]
         with open('DATA.txt', 'w') as data:
-            json_data = json.dumps(post)
-            data.write(json_data)
-
+            writer(data).writerow(post)
     bergen_station.shut_down()
 else: print("sorry didnt get that")
