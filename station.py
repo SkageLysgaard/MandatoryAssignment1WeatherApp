@@ -1,10 +1,4 @@
 from threading import Event, Lock, Thread
-<<<<<<< HEAD
-
-import numpy as np
-from numpy.random import binomial, normal
-
-=======
 from socket import socket, AF_INET,SOCK_DGRAM
 import json
 from time import sleep
@@ -19,7 +13,6 @@ from socket import socket, AF_INET, SOCK_DGRAM
 sock = socket(AF_INET,SOCK_DGRAM)
 sock.connect(("localhost", 5560))
 
->>>>>>> 2538a6772d1ed8a1fb368644416d998070591f41
 
 class StationSimulator:
     """Class for weather station simulation.
@@ -161,11 +154,6 @@ class StationSimulator:
             return round(self._rain, 2)
 
 
-<<<<<<< HEAD
-f = open("weatherinfo.py", "w")
-f.write(str(_days_of_month))
-f.close()
-=======
 
 if __name__ == "__main__":
    
@@ -181,9 +169,8 @@ if __name__ == "__main__":
         sleep(1)
         # Read new weather data and append it to the
         # corresponding list
-        post = [{bergen_station.location},bergen_station.month, bergen_station.temperature,bergen_station.rain]
+        post = [bergen_station.location,bergen_station.month, bergen_station.temperature,bergen_station.rain]
         with open('DATA.txt', 'w') as data:
             writer(data).writerow(post)
     bergen_station.shut_down()
 else: print("sorry didnt get that")
->>>>>>> 2538a6772d1ed8a1fb368644416d998070591f41
