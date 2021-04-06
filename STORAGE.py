@@ -19,8 +19,9 @@ def start():
         ct = Thread(conn)
         encoded = data.encode()
         #Dersom inputen fra CLI er x:
-        if(encoded == 1):
-            pass
+        if(encoded == 1):#Dersom meldingen fra FMI er 1 aka "rain":
+                with open("DATA.txt") as data:
+                    data.read
         #Dersom 
         conn.send(data.encode())
         print(f'Received message from {TCP_addr, UDP_adress}, message: {data}')
