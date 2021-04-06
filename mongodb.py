@@ -6,5 +6,5 @@ database = cluster["cluster"]
 collection = database["collection"]
 
 wheater_info = {"informasjonen fra station"}
-
-wheater_info_update = collection.update_one({"informasjonen som skal inn i databasen"})
+post1 = {"_id":5, "name" : "bill"}
+wheater_info_update = collection.update_one({post1})
