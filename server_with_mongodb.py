@@ -32,10 +32,10 @@ if __name__ == "__main__":
 else:
     print("Sorry, i didn't get that")
 
-    
-
+'''
 filename = location
 file = open(filename , "rb")
 file_data = file.read(1024)
 conn.send(file_data)
 print("Data has been sendt successfully!")
+'''
