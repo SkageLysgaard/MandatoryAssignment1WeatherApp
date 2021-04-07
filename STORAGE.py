@@ -5,11 +5,22 @@ import csv
 
 socketTCP = socket(AF_INET,SOCK_STREAM)
 socketTCP.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
-socketUDP = socket(AF_INET,SOCK_DGRAM)
-socketUDP.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
+socketUDPBergen = socket(AF_INET,SOCK_DGRAM)
+socketUDPBergen.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
+socketUDPTromso = socket(AF_INET,SOCK_DGRAM)
+socketUDPTromso.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
+socketUDPOslo = socket(AF_INET,SOCK_DGRAM)
+socketUDPOslo.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
+
+
 
 socketTCP.bind(("localhost", 5559))
-socketUDP.bind(("localhost", 5560))
+socketUDPBergen.bind(("localhost", 5560))
+socketUDPTromso.bind(("localhost", 5561))
+socketUDPOslo.bind(("localhost", 5562))
+
+
+
 
 def handle_client(conn, addr):
     print(f"[NEW CONNECTION] {addr} connected")
@@ -18,15 +29,30 @@ def handle_client(conn, addr):
         msg_length = conn.recv(64)
     conn.close()
 
-def receive_information_UDP():
+def receive_information_UDP_Bergen():
     while True:
-        weatherData , UDP_adress = socketUDP.recvfrom(2048)
+        weatherData , UDP_adress = socketUDPBergen.recvfrom(2048)
         decoded = weatherData.decode()
         print("Recieved" + decoded)
         with open("DATA.txt", "a") as data:
             #csv.writer(data).writerow(decoded)
             data.write(decoded + "\n")
-            
+def receive_information_UDP_Tromso():
+    while True:
+        weatherData , UDP_adress = socketUDPTromso.recvfrom(2048)
+        decoded = weatherData.decode()
+        print("Recieved" + decoded)
+        with open("DATA.txt", "a") as data:
+            #csv.writer(data).writerow(decoded)
+            data.write(decoded + "\n")
+def receive_information_UDP_Oslo():
+    while True:
+        weatherData , UDP_adress = socketUDPOslo.recvfrom(2048)
+        decoded = weatherData.decode()
+        print("Recieved" + decoded)
+        with open("DATA.txt", "a") as data:
+            #csv.writer(data).writerow(decoded)
+            data.write(decoded + "\n")
 
 def receive_information_client():
     socketTCP.listen()
@@ -37,9 +63,11 @@ def receive_information_client():
         print(f'Received message from {TCP_addr}, message: {data}')
 
 
-x = threading.Thread(target=receive_information_UDP)
+x = threading.Thread(target=receive_information_UDP_Bergen)
+x1 = threading.Thread(target=receive_information_UDP_Tromso)
 y = threading.Thread(target=receive_information_client)
 x.start()
+x1.start()
 y.start()
 def start():
     socketTCP.listen()

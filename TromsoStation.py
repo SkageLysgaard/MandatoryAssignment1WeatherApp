@@ -1,8 +1,17 @@
 from threading import Event, Lock, Thread
-
+from socket import socket, AF_INET,SOCK_DGRAM
+import json
+from time import sleep
 import numpy as np
 from numpy.random import binomial, normal
+import csv
+from csv import writer
 
+from socket import socket, AF_INET, SOCK_DGRAM
+
+
+sock = socket(AF_INET,SOCK_DGRAM)
+ADDRESS_PORT = ("localhost", 5561)
 
 class StationSimulator:
     """Class for weather station simulation.
@@ -143,7 +152,23 @@ class StationSimulator:
         with self._lock:
             return round(self._rain, 2)
 
-
-f = open("weatherinfo.py", "w")
-f.write(str(_days_of_month))
-f.close()
+if __name__ == "__main__":
+    with open("DATA.txt", "w") as data:
+        List = ["Location", "Month", "Temperature", "Rain"]
+        writer(data).writerow(List)
+    tromso_station = StationSimulator(simulation_interval=1)
+    tromso_station.turn_on()
+    for _ in range(72):
+        # Sleep for 1 second to wait for new weather data
+        # to be simulated
+        sleep(1)
+        # Read new weather data and append it to the
+        # corresponding list
+        post = [str(tromso_station.location),str(tromso_station.month), str(tromso_station.temperature),str(tromso_station.rain)]
+        post_as_string = ",".join(post)
+        encoded = post_as_string.encode()
+        sock.sendto(encoded,ADDRESS_PORT)
+        #with open('DATA.txt', 'w') as data:
+            #writer(data).write(post)
+    tromso_station.shut_down()
+else: print("sorry didnt get that")
