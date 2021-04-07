@@ -3,7 +3,7 @@ from socket import socket, AF_INET, SOCK_STREAM
 
 app = Flask(__name__)
 
-@app.route("location")
+@app.route("/location")
 def recieveLocation():
     pass
 @app.route("month")

@@ -11,8 +11,7 @@ from socket import socket, AF_INET, SOCK_DGRAM
 
 
 sock = socket(AF_INET,SOCK_DGRAM)
-sock.connect(("localhost", 5560))
-
+ADDRESS_PORT = ("localhost", 5560)
 
 class StationSimulator:
     """Class for weather station simulation.
@@ -167,8 +166,11 @@ if __name__ == "__main__":
         sleep(1)
         # Read new weather data and append it to the
         # corresponding list
-        post = [str(bergen_station.location),bergen_station.month, bergen_station.temperature,bergen_station.rain]
-        with open('DATA.txt', 'w') as data:
-            writer(data).write(post)
+        post = [str(bergen_station.location),str(bergen_station.month), str(bergen_station.temperature),str(bergen_station.rain)]
+        post_as_string = ",".join(post)
+        encoded = post_as_string.encode()
+        sock.sendto(encoded,ADDRESS_PORT)
+        #with open('DATA.txt', 'w') as data:
+            #writer(data).write(post)
     bergen_station.shut_down()
 else: print("sorry didnt get that")

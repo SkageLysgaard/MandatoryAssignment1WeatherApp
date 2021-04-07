@@ -1,5 +1,5 @@
 from socket import socket, AF_INET,SOCK_STREAM, SOCK_DGRAM, SOL_SOCKET, SO_REUSEADDR
-from threading import Thread
+import threading
 import csv
 
 
@@ -11,13 +11,36 @@ socketUDP.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
 socketTCP.bind(("localhost", 5559))
 socketUDP.bind(("localhost", 5560))
 
-"""def handle_client(conn, addr):
+def handle_client(conn, addr):
     print(f"[NEW CONNECTION] {addr} connected")
     connected = True
     while connected:
         msg_length = conn.recv(64)
-    conn.close()"""
+    conn.close()
 
+def receive_information_UDP():
+    while True:
+        weatherData , UDP_adress = socketUDP.recvfrom(2048)
+        decoded = weatherData.decode()
+        print("Recieved" + decoded)
+        with open("DATA.txt", "a") as data:
+            #csv.writer(data).writerow(decoded)
+            data.write(decoded + "\n")
+            
+
+def receive_information_client():
+    socketTCP.listen()
+    print("[LISTENING] The server is listening on ...")
+    conn, TCP_addr = socketTCP.accept()
+    while True:
+        data = conn.recv(1024).decode()
+        print(f'Received message from {TCP_addr}, message: {data}')
+
+
+x = threading.Thread(target=receive_information_UDP)
+y = threading.Thread(target=receive_information_client)
+x.start()
+y.start()
 def start():
     socketTCP.listen()
     print("[LISTENING] The server is listening on ...")

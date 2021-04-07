@@ -6,12 +6,13 @@ client.connect(("localhost", 5559))
 print("[CONNECTED]")
 print("Weather data:")
 print("Write 1 for rain: ")
-
-numbers = str(input("Enter a number"))
-#sends the location to the server
-msg = numbers.encode("utf-8")
-hello =  client.send(msg)
-print(hello)
+while True:
+    numbers = str(input("Enter a number"))
+    #sends the location to the server
+    msg = numbers.encode("utf-8")
+    hello =  client.send(msg)
+    msg_receievd = client.recvfrom(1024)
+    print(msg_receievd.decode())
 
 """filename = "recieved_data"
 file = open(filename, "wb")

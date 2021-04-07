@@ -1,1 +1,13 @@
-Bergen,May,12.65,0
+Location,Month,Temperature,Rain
+Bergen,May,0,0
+Bergen,May,6.2,0
+Bergen,May,8.92,0
+Bergen,May,8.92,0
+Bergen,May,9.7,0
+Bergen,May,10.54,0
+Bergen,May,11.34,0
+Bergen,May,10.5,0
+Bergen,May,10.5,0
+Bergen,May,13.65,0
+Bergen,May,15.05,0
+Bergen,May,13.64,0
