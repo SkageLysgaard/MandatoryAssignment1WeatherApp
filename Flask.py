@@ -7,7 +7,7 @@ from flask import Flask
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route("/værmelding")
 def home():
    return "Hei, værmeldingen i dag er <h1>VÆRMELDINGEN<h1>"
 
