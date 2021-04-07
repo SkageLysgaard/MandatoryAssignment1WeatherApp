@@ -156,21 +156,19 @@ class StationSimulator:
 
 
 if __name__ == "__main__":
-   
-    bergen_station = StationSimulator(simulation_interval=1)
-    bergen_station.turn_on()
     with open("DATA.txt", "w") as data:
         List = ["Location", "Month", "Temperature", "Rain"]
-        writer_object = writer(data)
-        writer_object.writerow(List)
+        writer(data).writerow(List)
+    bergen_station = StationSimulator(simulation_interval=1)
+    bergen_station.turn_on()
     for _ in range(72):
         # Sleep for 1 second to wait for new weather data
         # to be simulated
         sleep(1)
         # Read new weather data and append it to the
         # corresponding list
-        post = [bergen_station.location,bergen_station.month, bergen_station.temperature,bergen_station.rain]
+        post = [str(bergen_station.location),bergen_station.month, bergen_station.temperature,bergen_station.rain]
         with open('DATA.txt', 'w') as data:
-            writer(data).writerow(post)
+            writer(data).write(post)
     bergen_station.shut_down()
 else: print("sorry didnt get that")
