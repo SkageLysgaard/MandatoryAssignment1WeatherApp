@@ -14,6 +14,6 @@ def recieveTemperature():
     pass
 @app.route("rain")
 def recieveRain():
-    
+    pass
 
 
