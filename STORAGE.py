@@ -62,38 +62,15 @@ def receive_information_client():
         data = conn.recv(1024).decode()
         print(f'Received message from {TCP_addr}, message: {data}')
 
+#Definerer threading for hver metode
+TCP = threading.Thread(target=receive_information_client)
+UDP_B = threading.Thread(target=receive_information_UDP_Bergen)
+UDP_T = threading.Thread(target=receive_information_UDP_Tromso)
+UDP_O = threading.Thread(target=receive_information_UDP_Oslo)
 
-x = threading.Thread(target=receive_information_UDP_Bergen)
-x1 = threading.Thread(target=receive_information_UDP_Tromso)
-y = threading.Thread(target=receive_information_client)
-x.start()
-x1.start()
-y.start()
-def start():
-    socketTCP.listen()
-    print("[LISTENING] The server is listening on ...")
-    while True:
-        conn, TCP_addr = socketTCP.accept()
-        #ct = Thread(conn)
-        weatherData , UDP_adress = socketUDP.recvfrom(2048)
-        #ct1 = Thread(weatherData)
-        data = conn.recv(1024).decode()
-        weatherData.sendto(data, UDP_adress)
-        if data:
-            encoded = data.encode()
-            #Dersom inputen fra CLI er x:
-            print(data)
-            if(data == "1"):#Dersom meldingen fra FMI er 1 aka "rain":
-                    with open("DATA.txt") as data:
-                        reader = csv.reader(data, delimiter = "\t")
-                        for row in reader: 
-                            pass
-            #Dersom 
-            print(f'Received message from {TCP_addr}, message:')
-            print(encoded)
-            #print(f'Received message from {UDP_adress}, message: {data}') #Denne funker ikke, av en eller annen grunn
-            #ct.run()
-            conn.close()
-print("[STARTING] server is starting")
-start()
+#Starter Threading
+UDP_B.start()
+UDP_T.start()
+UDP_O.start()
+TCP.start()
 
