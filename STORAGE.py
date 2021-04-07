@@ -14,7 +14,7 @@ socketUDPOslo.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
 
 
 
-socketTCP.bind(("localhost", 5559))
+socketTCP.bind(("localhost", 5558))
 socketUDPBergen.bind(("localhost", 5560))
 socketUDPTromso.bind(("localhost", 5561))
 socketUDPOslo.bind(("localhost", 5562))
@@ -58,9 +58,19 @@ def receive_information_client():
     socketTCP.listen()
     print("[LISTENING] The server is listening on ...")
     conn, TCP_addr = socketTCP.accept()
+    cities = ['OSLO', 'BERGEN', 'TROMSO']
     while True:
         data = conn.recv(1024).decode()
         print(f'Received message from {TCP_addr}, message: {data}')
+        conn.send(data.encode())
+        if(data in cities):
+            textfile = 'DATA' + str(data) + '.txt'
+            with open(textfile) as csv_file:
+                csv_reader = csv.reader(csv_file)
+                for row in csv_reader:
+                    encoded = f'{row[0]},{row[1]},{row[2]},{row[3]} \n'.encode()
+                    print(encoded.decode())
+                    conn.send(encoded)
 
 #Definerer threading for hver metode
 TCP = threading.Thread(target=receive_information_client)
@@ -69,8 +79,9 @@ UDP_T = threading.Thread(target=receive_information_UDP_Tromso)
 UDP_O = threading.Thread(target=receive_information_UDP_Oslo)
 
 #Starter Threading
+TCP.start()
 UDP_B.start()
 UDP_T.start()
 UDP_O.start()
-TCP.start()
+
 

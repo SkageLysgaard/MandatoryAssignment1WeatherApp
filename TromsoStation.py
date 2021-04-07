@@ -153,9 +153,11 @@ class StationSimulator:
             return round(self._rain, 2)
 
 if __name__ == "__main__":
-    with open("DATA.txt", "w") as data:
-        List = ["Location", "Month", "Temperature", "Rain"]
-        writer(data).writerow(List)
+    with open("DATABERGEN.txt", "a") as data:
+            List = ["Location,", "Month,", "Temperature,", "Rain"]
+            for obj in List:
+                data.write(str(obj))
+            data.write('\n')
     tromso_station = StationSimulator(simulation_interval=1)
     tromso_station.turn_on()
     for _ in range(72):

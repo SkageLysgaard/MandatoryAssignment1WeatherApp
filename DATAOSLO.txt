@@ -1,0 +1,11 @@
+Location,Month,Temperature,Rain
+Oslo,May,0,0
+Oslo,May,11.25,0
+Oslo,May,11.03,0
+Oslo,May,10.04,0
+Oslo,May,10.55,0
+Oslo,May,13.22,0
+Oslo,May,16.1,0
+Oslo,May,19.24,0
+Oslo,May,21.18,0
+Oslo,May,21.46,0
