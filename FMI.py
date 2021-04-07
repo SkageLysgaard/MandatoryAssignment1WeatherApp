@@ -14,11 +14,6 @@ while True:
     msg_receievd = client.recvfrom(1024)
     print(msg_receievd.decode())
 
-"""filename = "recieved_data"
-file = open(filename, "wb")
-file_data = client.recv(1024)
-file.write(file_data)
-file.close()
-print("File has been recieved succsessfully!")"""
+
 
 
