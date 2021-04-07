@@ -155,7 +155,7 @@ class StationSimulator:
 
 
 if __name__ == "__main__":
-    with open("DATA.txt", "w") as data:
+    with open("DATABERGEN.txt", "w") as data:
         List = ["Location", "Month", "Temperature", "Rain"]
         writer(data).writerow(List)
     bergen_station = StationSimulator(simulation_interval=1)

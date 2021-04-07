@@ -34,7 +34,7 @@ def receive_information_UDP_Bergen():
         weatherData , UDP_adress = socketUDPBergen.recvfrom(2048)
         decoded = weatherData.decode()
         print("Recieved" + decoded)
-        with open("DATA.txt", "a") as data:
+        with open("DATABERGEN.txt", "a") as data:
             #csv.writer(data).writerow(decoded)
             data.write(decoded + "\n")
 def receive_information_UDP_Tromso():
@@ -42,7 +42,7 @@ def receive_information_UDP_Tromso():
         weatherData , UDP_adress = socketUDPTromso.recvfrom(2048)
         decoded = weatherData.decode()
         print("Recieved" + decoded)
-        with open("DATA.txt", "a") as data:
+        with open("DATATROMSO.txt", "a") as data:
             #csv.writer(data).writerow(decoded)
             data.write(decoded + "\n")
 def receive_information_UDP_Oslo():
@@ -50,7 +50,7 @@ def receive_information_UDP_Oslo():
         weatherData , UDP_adress = socketUDPOslo.recvfrom(2048)
         decoded = weatherData.decode()
         print("Recieved" + decoded)
-        with open("DATA.txt", "a") as data:
+        with open("DATAOSLO.txt", "a") as data:
             #csv.writer(data).writerow(decoded)
             data.write(decoded + "\n")
 

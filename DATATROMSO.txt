@@ -1,0 +1,9 @@
+Tromso,May,-5.64,0
+Tromso,May,-2.05,0
+Tromso,May,-4.16,0
+Tromso,May,-1.75,0
+Tromso,May,-1.45,0
+Tromso,May,0.99,0
+Tromso,May,2.16,0
+Tromso,May,3.69,0
+Tromso,May,5.21,0
