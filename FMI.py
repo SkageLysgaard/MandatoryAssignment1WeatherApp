@@ -28,6 +28,7 @@ while True:
         print(msg_receievd.decode())
         print(msg_2.decode())
     elif (msg == DISCONNECT_MESSAGE): 
+        client.close()
         break
 
 

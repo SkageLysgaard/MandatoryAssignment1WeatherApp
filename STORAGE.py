@@ -71,6 +71,8 @@ def receive_information_client():
                     encoded = f'{row[0]},{row[1]},{row[2]},{row[3]} \n'.encode()
                     print(encoded.decode())
                     conn.send(encoded)
+        if(data == 'DISCONNECT'):
+            conn.close()
 
 #Definerer threading for hver metode
 TCP = threading.Thread(target=receive_information_client)
