@@ -64,6 +64,7 @@ def receive_information_client():
         print(f'Received message from {TCP_addr}, message: {data}')
         conn.send(data.encode())
         if(data in cities):
+            
             textfile = 'DATA' + str(data) + '.txt'
             with open(textfile) as csv_file:
                 csv_reader = csv.reader(csv_file)

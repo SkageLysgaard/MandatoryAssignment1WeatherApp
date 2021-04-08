@@ -1,4 +1,5 @@
 from socket import socket, create_connection, AF_INET, SOCK_STREAM
+import matplotlib.pyplot as plt
 
 client = socket(AF_INET, SOCK_STREAM)
 client.connect(("localhost", 5558))
@@ -26,7 +27,14 @@ while True:
 
         print('RECEIVING DATA: ')
         print(msg_receievd.decode())
-        print(msg_2.decode())
+        stripped = msg_2.decode().split(sep=',' and '\n')
+        #print(msg_2.decode())
+        print(stripped)
+        
+        """if(msg_2.decode() != 'Location,Month,Temperature,Rain'):
+            Liste = []
+            for obj in 
+            plt.plot()"""
     elif (msg == DISCONNECT_MESSAGE): 
         client.close()
         break
