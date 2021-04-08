@@ -6,10 +6,11 @@ from flask import Flask
 
 app = Flask(__name__)
 
+@app.route("/<by>")
+def Oslo(by):
+    return f"Værmeldingen i dag i {by} er <h1>VÆRMELDINGEN<h1>"
 
-@app.route("/værmelding")
-def home():
-   return "Hei, værmeldingen i dag er <h1>VÆRMELDINGEN<h1>"
+
 
 if __name__ == "__main__":
     app.run()
