@@ -162,7 +162,7 @@ if __name__ == "__main__":
     
     oslo_station = StationSimulator(simulation_interval=1)
     oslo_station.turn_on()
-    for _ in range(72):
+    for _ in range(5):
         # Sleep for 1 second to wait for new weather data
         # to be simulated
         sleep(1)

@@ -4,9 +4,18 @@ import csv
 import pymongo
 from pymongo import MongoClient
 
-cluster = MongoClient("mongodb://adminGroven:12345678!@weatherstoragedb-shard-00-00.8q1zq.mongodb.net:27017,weatherstoragedb-shard-00-01.8q1zq.mongodb.net:27017,weatherstoragedb-shard-00-02.8q1zq.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-ubvlc6-shard-0&authSource=admin&retryWrites=true&w=majority")
-database = cluster["WeatherStorageDB"]
-collection = database["location"]
+
+username = "admin"
+clusterName = "inf142-cluster-demo"
+
+
+
+cluster = MongoClient("mongodb+srv://adminGroven:12345678!@weatherstoragedb.8q1zq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+database = cluster.Location
+collection = database.Location
+
+
+#weatherInfo = database.weatherInfo
 
 
 socketTCP = socket(AF_INET,SOCK_STREAM)
@@ -60,6 +69,7 @@ def receive_information_UDP_Oslo():
             #csv.writer(data).writerow(decoded)
             data.write(decoded + "\n")
 
+
 def receive_information_client():
     socketTCP.listen()
     print("[LISTENING] The server is listening on ...")
@@ -70,29 +80,28 @@ def receive_information_client():
         print(f'Received message from {TCP_addr}, message: {data}')
         conn.send(data.encode())
         if(data in cities):
-            
             textfile = 'DATA' + str(data) + '.txt'
             with open(textfile) as csv_file:
                 csv_reader = csv.reader(csv_file)
                 for row in csv_reader:
-                    post = {"_id":0, "location":row[0].location,"month":row[1], "temperature":row[2], "rain":row[4]}
-                    collection.update_one({post})
-                    encoded = f'{row[0]},{row[1]},{row[2]},{row[3]} \n'.encode()
-                    print(encoded.decode())
-                    conn.send(encoded)
+                    post = {"location":row[0],"month":row[1], "temperature":row[2], "rain":row[3]}
+                    collection.insert_one(post)
+                    weather = f'{row[0]},{row[1]},{row[2]},{row[3]} \n'
+                    print(weather)
+                    conn.send(weather.encode())
         if(data == 'DISCONNECT'):
             conn.close()
 
 #Definerer threading for hver metode
-TCP = threading.Thread(target=receive_information_client)
 UDP_B = threading.Thread(target=receive_information_UDP_Bergen)
 UDP_T = threading.Thread(target=receive_information_UDP_Tromso)
 UDP_O = threading.Thread(target=receive_information_UDP_Oslo)
+TCP = threading.Thread(target=receive_information_client)
 
 #Starter Threading
-TCP.start()
 UDP_B.start()
 UDP_T.start()
 UDP_O.start()
+TCP.start()
 
 

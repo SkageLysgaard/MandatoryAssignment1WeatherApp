@@ -1,5 +1,5 @@
 from socket import socket, create_connection, AF_INET, SOCK_STREAM
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 
 client = socket(AF_INET, SOCK_STREAM)
 client.connect(("localhost", 5558))
@@ -13,23 +13,36 @@ print(f'TROMSO: Receive all data from TROMSO \n \n')
 print(f'DISCONNECT : Disconnects from the server')
 
 DISCONNECT_MESSAGE = 'DISCONNECT'
-
+isConnected = True
 
 while True:
     msg = str(input("Enter CITY: "))
     if (msg != DISCONNECT_MESSAGE):
         #sends the location to the server
-        msg = msg.encode("utf-8")
+        #msg = msg.encode("utf-8")
         hello =  client.send(msg)
-        msg_receievd, _ = client.recvfrom(2048)
-        msg_2, _ = client.recvfrom(2048)
-        msg_3, _ = client.recvfrom(2048)
+        while msg != DISCONNECT_MESSAGE:
+            try: 
+                msg = client.recv(2048)
+            except: 
+                break
+            else: 
+                if msg: 
+                    print(msg.decode())
+                else: 
+                    break
+
+            
+            
+
 
         print('RECEIVING DATA: ')
-        print(msg_receievd.decode())
-        stripped = msg_2.decode().split(sep=',' and '\n')
+        print(msg.decode())
+        #stripped = msg_2.decode().split(sep=',' and '\n')
         #print(msg_2.decode())
-        print(stripped)
+        #print(stripped)
+
+        
         
         """if(msg_2.decode() != 'Location,Month,Temperature,Rain'):
             Liste = []
