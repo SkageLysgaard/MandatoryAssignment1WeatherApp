@@ -4,9 +4,9 @@ import csv
 import pymongo
 from pymongo import MongoClient
 
-cluster = MongoClient("mongodb://adminGroven:<12345678!>@weatherstoragedb-shard-00-00.8q1zq.mongodb.net:27017,weatherstoragedb-shard-00-01.8q1zq.mongodb.net:27017,weatherstoragedb-shard-00-02.8q1zq.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-ubvlc6-shard-0&authSource=admin&retryWrites=true&w=majority")
-database = cluster["cluster"]
-collection = database["collection"]
+cluster = MongoClient("mongodb://adminGroven:12345678!@weatherstoragedb-shard-00-00.8q1zq.mongodb.net:27017,weatherstoragedb-shard-00-01.8q1zq.mongodb.net:27017,weatherstoragedb-shard-00-02.8q1zq.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-ubvlc6-shard-0&authSource=admin&retryWrites=true&w=majority")
+database = cluster["WeatherStorageDB"]
+collection = database["location"]
 
 
 socketTCP = socket(AF_INET,SOCK_STREAM)
@@ -74,8 +74,8 @@ def receive_information_client():
             with open(textfile) as csv_file:
                 csv_reader = csv.reader(csv_file)
                 for row in csv_reader:
-                    post = {"_id":5, "location":row[0].location,"month":row[1], "temperature":row[2], "rain":row[4]}
-                    wheater_info_update = collection.update_one({post})
+                    post = {"_id":0, "location":row[0].location,"month":row[1], "temperature":row[2], "rain":row[4]}
+                    collection.update_one({post})
                     encoded = f'{row[0]},{row[1]},{row[2]},{row[3]} \n'.encode()
                     print(encoded.decode())
                     conn.send(encoded)
