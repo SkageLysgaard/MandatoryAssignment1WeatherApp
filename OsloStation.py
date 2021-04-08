@@ -13,7 +13,21 @@ from socket import socket, AF_INET, SOCK_DGRAM
 sock = socket(AF_INET,SOCK_DGRAM)
 ADDRESS_PORT = ("localhost", 5562)
 
+location = []
+month = []
+temperature = []
+rain = []
+weatherData = {
+        "LOCATION" : location,
+        "MONTH" : month,
+        "TEMPERATURE" : temperature,
+        "RAIN" : rain 
+    }
 class StationSimulator:
+    
+    
+    
+
     """Class for weather station simulation.
 
     After the simulation begins, measures are updated repeatedly
@@ -152,6 +166,7 @@ class StationSimulator:
         with self._lock:
             return round(self._rain, 2)
 
+   
 
 if __name__ == "__main__":
     with open("DATAOSLO.txt", "a") as data:
@@ -168,8 +183,13 @@ if __name__ == "__main__":
         sleep(1)
         # Read new weather data and append it to the
         # corresponding list
-        post = [str(oslo_station.location),str(oslo_station.month), str(oslo_station.temperature),str(oslo_station.rain)]
-        post_as_string = ",".join(post)
+        location.append(oslo_station.location)
+        month.append(oslo_station.month)
+        temperature.append(oslo_station.temperature)
+        rain.append(oslo_station.rain)
+
+        #post = [str(oslo_station.location),str(oslo_station.month), str(oslo_station.temperature),str(oslo_station.rain)]
+        #post_as_string = ",".join(post)
         encoded = post_as_string.encode()
         sock.sendto(encoded,ADDRESS_PORT)
         #with open('DATA.txt', 'w') as data:
