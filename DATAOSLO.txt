@@ -9,3 +9,12 @@ Oslo,May,16.1,0
 Oslo,May,19.24,0
 Oslo,May,21.18,0
 Oslo,May,21.46,0
+Location,Month,Temperature,Rain
+Oslo,May,8.19,0
+Oslo,May,9.88,0
+Oslo,May,8.45,0
+Oslo,May,9.43,0
+Oslo,May,11.39,0
+Oslo,May,11.69,0
+Oslo,May,15.43,0
+Oslo,May,17.31,0
