@@ -38,7 +38,7 @@ if (msg != DISCONNECT_MESSAGE):
                 #liste = json.loads(decoded)
                 for obj in liste:
                     obje = json.loads(obj[0])
-                    print(obje["RAIN"])
+                    print(obje['RAIN'])
 
             else: 
                 break
