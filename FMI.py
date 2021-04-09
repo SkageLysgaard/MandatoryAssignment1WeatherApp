@@ -40,14 +40,18 @@ while True:
 
                     for obj in liste:
                         obje = json.loads(obj[0])
-                        print(obje['TEMPERATURE'])
-                        print(obje['RAIN'])
+                        temp_list = obje['TEMPERATURE']
+                        rain_list = obje['RAIN']
+                        location = obje['LOCATION']
+                        month = obje['MONTH']
+                        plot_temp(temp_list, 1, location, month)
+                        plot_temp(rain_list, 2, location, month)
+                        plt.show()
+
+                        print(temp_list)
+                        print(rain_list)
                 else: 
                     break
-
-            
-            
-
 
         
 
@@ -56,7 +60,19 @@ while True:
         #print(stripped)
 
         
-    
+ def plot_temp(liste, index, location, month):
+    plt.subplot(1, 2, index)
+    plt.plot(liste)
+    plt.xlabel('Tid')
+    plt.ylabel('Temperatur')
+    plt.title(f'Temperaturer i {location} for {month}')
+
+def plot_rain(liste, index, location, month):
+    plt.subplot(1, 2, index)
+    plt.plot(liste)
+    plt.xlabel('Tid')
+    plt.ylabel('Regn')
+    plt.title(f'Regnmengde i {location} for {month}')   
 
 
 
