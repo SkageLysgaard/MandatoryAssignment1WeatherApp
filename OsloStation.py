@@ -169,30 +169,26 @@ class StationSimulator:
    
 
 if __name__ == "__main__":
-    with open("DATAOSLO.txt", "a") as data:
+    """with open("DATAOSLO.txt", "a") as data:
             List = ["Location,", "Month,", "Temperature,", "Rain"]
             for obj in List:
                 data.write(str(obj))
-            data.write('\n')
+            data.write('\n')"""
     
     oslo_station = StationSimulator(simulation_interval=1)
     oslo_station.turn_on()
+    location.append(oslo_station.location)
+    month.append(oslo_station.month)
     for _ in range(5):
         # Sleep for 1 second to wait for new weather data
         # to be simulated
         sleep(1)
         # Read new weather data and append it to the
         # corresponding list
-        location.append(oslo_station.location)
-        month.append(oslo_station.month)
         temperature.append(oslo_station.temperature)
         rain.append(oslo_station.rain)
 
-        #post = [str(oslo_station.location),str(oslo_station.month), str(oslo_station.temperature),str(oslo_station.rain)]
-        #post_as_string = ",".join(post)
-        encoded = post_as_string.encode()
-        sock.sendto(encoded,ADDRESS_PORT)
-        #with open('DATA.txt', 'w') as data:
-            #writer(data).write(post)
+    encoded = str(weatherData).encode()
+    sock.sendto(encoded,ADDRESS_PORT)
     oslo_station.shut_down()
 else: print("sorry didnt get that")

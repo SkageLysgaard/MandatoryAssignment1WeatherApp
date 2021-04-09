@@ -49,7 +49,7 @@ def receive_information_UDP_Bergen():
         weatherData , UDP_adress = socketUDPBergen.recvfrom(2048)
         decoded = weatherData.decode()
         print("Recieved" + decoded)
-        with open("DATABERGEN.txt", "a") as data:
+        with open("DATABERGEN.csv", "a") as data:
             #csv.writer(data).writerow(decoded)
             data.write(decoded + "\n")
 def receive_information_UDP_Tromso():
@@ -57,7 +57,7 @@ def receive_information_UDP_Tromso():
         weatherData , UDP_adress = socketUDPTromso.recvfrom(2048)
         decoded = weatherData.decode()
         print("Recieved" + decoded)
-        with open("DATATROMSO.txt", "a") as data:
+        with open("DATATROMSO.csv", "a") as data:
             #csv.writer(data).writerow(decoded)
             data.write(decoded + "\n")
 def receive_information_UDP_Oslo():
@@ -65,7 +65,7 @@ def receive_information_UDP_Oslo():
         weatherData , UDP_adress = socketUDPOslo.recvfrom(2048)
         decoded = weatherData.decode()
         print("Recieved" + decoded)
-        with open("DATAOSLO.txt", "a") as data:
+        with open("DATAOSLO.csv", "a") as data:
             #csv.writer(data).writerow(decoded)
             data.write(decoded + "\n")
 
@@ -75,22 +75,19 @@ def receive_information_client():
     print("[LISTENING] The server is listening on ...")
     conn, TCP_addr = socketTCP.accept()
     cities = ['OSLO', 'BERGEN', 'TROMSO']
-    while True:
-        data = conn.recv(1024).decode()
-        print(f'Received message from {TCP_addr}, message: {data}')
-        conn.send(data.encode())
-        if(data in cities):
-            textfile = 'DATA' + str(data) + '.txt'
-            with open(textfile) as csv_file:
-                csv_reader = csv.reader(csv_file)
-                for row in csv_reader:
-                    post = {"location":row[0],"month":row[1], "temperature":row[2], "rain":row[3]}
-                    collection.insert_one(post)
-                    weather = f'{row[0]},{row[1]},{row[2]},{row[3]} \n'
-                    print(weather)
-                    conn.send(weather.encode())
-        if(data == 'DISCONNECT'):
-            conn.close()
+    DATA = []
+
+    data = conn.recv(1024).decode()
+    print(f'Received message from {TCP_addr}, message: {data}')
+    #conn.send(data.encode())
+    if(data in cities):
+        textfile = 'DATA' + str(data) + '.csv'
+        with open(textfile) as csv_file:
+            csv_reader = csv.reader(csv_file, delimiter = '\n')
+            for row in csv_reader:
+                DATA.append(row)
+            conn.send(str(DATA).encode())
+    
 
 #Definerer threading for hver metode
 UDP_B = threading.Thread(target=receive_information_UDP_Bergen)

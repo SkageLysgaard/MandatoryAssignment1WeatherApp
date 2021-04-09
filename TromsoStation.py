@@ -12,7 +12,16 @@ from socket import socket, AF_INET, SOCK_DGRAM
 
 sock = socket(AF_INET,SOCK_DGRAM)
 ADDRESS_PORT = ("localhost", 5561)
-
+location = []
+month = []
+temperature = []
+rain = []
+weatherData = {
+        "LOCATION" : location,
+        "MONTH" : month,
+        "TEMPERATURE" : temperature,
+        "RAIN" : rain 
+    }
 class StationSimulator:
     """Class for weather station simulation.
 
@@ -153,24 +162,21 @@ class StationSimulator:
             return round(self._rain, 2)
 
 if __name__ == "__main__":
-    with open("DATABERGEN.txt", "a") as data:
-            List = ["Location,", "Month,", "Temperature,", "Rain"]
-            for obj in List:
-                data.write(str(obj))
-            data.write('\n')
+    
     tromso_station = StationSimulator(simulation_interval=1)
     tromso_station.turn_on()
+    location.append(tromso_station.location)
+    month.append(tromso_station.month)
     for _ in range(72):
         # Sleep for 1 second to wait for new weather data
         # to be simulated
         sleep(1)
         # Read new weather data and append it to the
         # corresponding list
-        post = [str(tromso_station.location),str(tromso_station.month), str(tromso_station.temperature),str(tromso_station.rain)]
-        post_as_string = ",".join(post)
-        encoded = post_as_string.encode()
-        sock.sendto(encoded,ADDRESS_PORT)
-        #with open('DATA.txt', 'w') as data:
-            #writer(data).write(post)
+        temperature.append(tromso_station.temperature)
+        rain.append(tromso_station.rain)
+        
+    encoded = str(weatherData).encode()
+    sock.sendto(encoded,ADDRESS_PORT)
     tromso_station.shut_down()
 else: print("sorry didnt get that")
