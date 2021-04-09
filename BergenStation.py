@@ -11,7 +11,7 @@ from socket import socket, AF_INET, SOCK_DGRAM
 
 
 sock = socket(AF_INET,SOCK_DGRAM)
-ADDRESS_PORT = ("localhost", 5560)
+ADDRESS_PORT = ("localhost", 5563)
 location = []
 month = []
 temperature = []

@@ -36,10 +36,10 @@ socketUDPOslo.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
 
 
 
-socketTCP.bind(("localhost", 5558))
-socketUDPBergen.bind(("localhost", 5560))
-socketUDPTromso.bind(("localhost", 5561))
-socketUDPOslo.bind(("localhost", 5562))
+socketTCP.bind(("localhost", 5557))
+socketUDPBergen.bind(("localhost", 5563))
+socketUDPTromso.bind(("localhost", 5564))
+socketUDPOslo.bind(("localhost", 5565))
 
 
 

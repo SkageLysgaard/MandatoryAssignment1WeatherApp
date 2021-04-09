@@ -27,4 +27,9 @@ I tillegg til å lagre og hente fra csv-filer, har vi en mongoDB-database vi sen
 
 Vi har valgt å bruke matplotlib.pyplot kombinert med user-input i terminalen som vår GUI. Brukeren vil kunne skrive inn valgt by, og få data respektivt, der data er navn, tid og graf over temperatur og regn. Begrunnelse for at dette er et GUI er fordi brukeren kan selv velge hvilken data han/hun vil ha (User Interface) fra hvilken by, og få ut dette som en graf (graphic).
 
-
+For å kjøre programmet må du:
+ 1.Starte serverer med "python STORAGE.py" i en terminal (ikke i anaconda). 
+ 2.Starte "FMI.py" i et annet terminalvindu
+ 3.Skrive ønsket by i FMI.py - Deretter få grafen
+ 4.Om du vil få en annen by må du close FMI.py med CTRL+C i terminalen og samme i STORAGE.py.
+ 5.Deretter kjøre server og FMI på nytt og repetere stegene. (dette er fordi vi ikke fikk while loopen til å fungere)      

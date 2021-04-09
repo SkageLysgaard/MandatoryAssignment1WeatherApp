@@ -1,11 +1,25 @@
 from socket import socket, create_connection, AF_INET, SOCK_STREAM
 import json
 import ast
+import matplotlib.pyplot as plt
 #import matplotlib.pyplot as plt
 
 client = socket(AF_INET, SOCK_STREAM)
-client.connect(("localhost", 5558))
+client.connect(("localhost", 5557))
 
+def plot_temp(liste, index, location, month):
+    plt.subplot(1, 2, index)
+    plt.plot(liste)
+    plt.xlabel('Tid')
+    plt.ylabel('Temperatur')
+    plt.title(f'Temperaturer i {location} for {month}')
+
+def plot_rain(liste, index, location, month):
+    plt.subplot(1, 2, index)
+    plt.plot(liste)
+    plt.xlabel('Tid')
+    plt.ylabel('Regn')
+    plt.title(f'Regnmengde i {location} for {month}')   
 
 
 print("[CONNECTED]")
@@ -22,7 +36,7 @@ isConnected = True
 while True:
     msg = str(input("Enter CITY: "))
     if(msg == False): break
-    client.send(msg.encode())
+    sent = client.send(msg.encode())
     if (msg != DISCONNECT_MESSAGE):
         #sends the location to the server
         #msg = msg.encode("utf-8")
@@ -37,7 +51,6 @@ while True:
                     print('RECEIVING DATA: ')
                     decoded = msg.decode()
                     liste = ast.literal_eval(decoded)
-
                     for obj in liste:
                         obje = json.loads(obj[0])
                         temp_list = obje['TEMPERATURE']
@@ -48,10 +61,11 @@ while True:
                         plot_temp(rain_list, 2, location, month)
                         plt.show()
 
-                        print(temp_list)
-                        print(rain_list)
+                        print('RECIEVED DATA: TEMP: ' + temp_list)
+                        print('RECIEVED DATA: TEMP: ' + rain_list)
                 else: 
                     break
+                    
 
         
 
@@ -60,19 +74,6 @@ while True:
         #print(stripped)
 
         
- def plot_temp(liste, index, location, month):
-    plt.subplot(1, 2, index)
-    plt.plot(liste)
-    plt.xlabel('Tid')
-    plt.ylabel('Temperatur')
-    plt.title(f'Temperaturer i {location} for {month}')
-
-def plot_rain(liste, index, location, month):
-    plt.subplot(1, 2, index)
-    plt.plot(liste)
-    plt.xlabel('Tid')
-    plt.ylabel('Regn')
-    plt.title(f'Regnmengde i {location} for {month}')   
 
 
 
