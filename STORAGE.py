@@ -4,16 +4,25 @@ import csv
 import pymongo
 from pymongo import MongoClient
 import json
+<<<<<<< HEAD
+=======
+from dotenv import load_dotenv
+load_dotenv()
+import os
+>>>>>>> 0af93423736d6c0eef1ef961ff166dba7801be4e
 
 
 username = "admin"
-clusterName = "inf142-cluster-demo"
+clusterName = "INFOBLIG"
 
 
 
-cluster = MongoClient("mongodb+srv://adminGroven:12345678!@weatherstoragedb.8q1zq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-database = cluster.Location
-collection = database.Location
+client = MongoClient("mongodb+srv://adminGroven:12345678!@WeatherStorageDB.8q1zq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+
+database = client.Location
+collection = database.location
+
+
 
 
 #weatherInfo = database.weatherInfo
@@ -87,6 +96,13 @@ def receive_information_client():
             csv_reader = csv.reader(csv_file, delimiter = '\n')
             for row in csv_reader:
                 DATA.append(row)
+                print(row)
+                obj = row[0]
+                obje = json.loads(obj)
+                print(obje)
+                collection.insert_one(obje)
+            
+        
             conn.send(str(DATA).encode())
     
 
@@ -101,5 +117,6 @@ UDP_B.start()
 UDP_T.start()
 UDP_O.start()
 TCP.start()
+
 
 
