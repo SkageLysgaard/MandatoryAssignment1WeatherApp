@@ -167,7 +167,7 @@ if __name__ == "__main__":
     tromso_station.turn_on()
     location.append(tromso_station.location)
     month.append(tromso_station.month)
-    for _ in range(72):
+    for _ in range(5):
         # Sleep for 1 second to wait for new weather data
         # to be simulated
         sleep(1)
@@ -175,7 +175,6 @@ if __name__ == "__main__":
         # corresponding list
         temperature.append(tromso_station.temperature)
         rain.append(tromso_station.rain)
-        
     encoded = str(weatherData).encode()
     sock.sendto(encoded,ADDRESS_PORT)
     tromso_station.shut_down()
