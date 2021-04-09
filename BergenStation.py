@@ -155,7 +155,7 @@ class StationSimulator:
 
 
 if __name__ == "__main__":
-    with open("DATABERGE.txt", "a") as data:
+    with open("DATABERGEN.txt", "a") as data:
             List = ["Location,", "Month,", "Temperature,", "Rain"]
             for obj in List:
                 data.write(str(obj))
