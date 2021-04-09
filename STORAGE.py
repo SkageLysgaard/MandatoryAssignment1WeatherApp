@@ -4,16 +4,22 @@ import csv
 import pymongo
 from pymongo import MongoClient
 import json
+from dotenv import load_dotenv
+load_dotenv()
+import os
 
 
 username = "admin"
-clusterName = "inf142-cluster-demo"
+clusterName = "INFOBLIG"
 
 
 
-cluster = MongoClient("mongodb+srv://adminGroven:12345678!@weatherstoragedb.8q1zq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-database = cluster.Location
-collection = database.Location
+client = MongoClient("mongodb+srv://adminGroven:12345678!@WeatherStorageDB.8q1zq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+
+database = client.Location
+collection = database.location
+
+
 
 
 #weatherInfo = database.weatherInfo
