@@ -35,9 +35,11 @@ if (msg != DISCONNECT_MESSAGE):
                 decoded = msg.decode()
                 print("hello")
                 liste = ast.literal_eval(decoded)
+                print(liste)
                 #liste = json.loads(decoded)
                 for obj in liste:
                     obje = json.loads(obj[0])
+                    print(obje)
                     print(obje['RAIN'])
 
             else: 

@@ -3,6 +3,7 @@ import threading
 import csv
 import pymongo
 from pymongo import MongoClient
+import json
 
 
 username = "admin"
@@ -86,7 +87,12 @@ def receive_information_client():
             csv_reader = csv.reader(csv_file, delimiter = '\n')
             for row in csv_reader:
                 DATA.append(row)
-            collection.update_one(DATA)
+                print(row)
+                obj = row[0]
+                obje = json.loads(obj)
+                print(obje)
+                collection.insert_one(obje)
+            
         
             conn.send(str(DATA).encode())
     
