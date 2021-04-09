@@ -13,13 +13,15 @@ label = tk.Label(
 )
 
 
-def get_weatherdata(city):
-    pass
+def plot_list(liste):
+    plt.subplot()
+    plt.plot(liste)
 
 
-demo_liste = [3,4,6,5,4,3,2,2,2,1,10,14,12,9,3,2,5]
-length = len(demo_liste)
+demo_liste2 = [3,4,6,5,4,3,2,2,2,1,10,14,12,9,3,2,5]
+demo_liste3 = [3,4,6,3,5,6,7,8,9,0,0,7,5,3,4,5,6,5]
 
-plt.plot(demo_liste)
+plot_list(demo_liste2)
+plot_list(demo_liste3)
 
 plt.show()

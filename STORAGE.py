@@ -4,12 +4,9 @@ import csv
 import pymongo
 from pymongo import MongoClient
 import json
-<<<<<<< HEAD
-=======
 from dotenv import load_dotenv
 load_dotenv()
 import os
->>>>>>> 0af93423736d6c0eef1ef961ff166dba7801be4e
 
 
 username = "admin"
