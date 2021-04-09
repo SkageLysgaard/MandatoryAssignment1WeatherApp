@@ -86,6 +86,8 @@ def receive_information_client():
             csv_reader = csv.reader(csv_file, delimiter = '\n')
             for row in csv_reader:
                 DATA.append(row)
+            collection.update_one(DATA)
+        
             conn.send(str(DATA).encode())
     
 
@@ -100,5 +102,6 @@ UDP_B.start()
 UDP_T.start()
 UDP_O.start()
 TCP.start()
+
 
 
