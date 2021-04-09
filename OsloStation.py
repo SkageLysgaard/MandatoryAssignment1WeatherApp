@@ -179,10 +179,10 @@ if __name__ == "__main__":
         sleep(1)
         # Read new weather data and append it to the
         # corresponding list
-        temperature.append(oslo_station.temperature)
-        rain.append(oslo_station.rain)
+        temperature.append(oslo_station.temperature) #Legger til data i listen temperatur i dict weatherData
+        rain.append(oslo_station.rain) #Legger til data i listen rain i dict weatherData
 
-    encoded = str(weatherData).encode()
-    sock.sendto(encoded,ADDRESS_PORT)
-    oslo_station.shut_down()
+    encoded = str(weatherData).encode() #gjør om kode til bits
+    sock.sendto(encoded,ADDRESS_PORT) #sender data til STORAGE
+    oslo_station.shut_down() #stopper simulasjonen
 else: print("sorry didnt get that")

@@ -22,7 +22,7 @@ collection = database.location
 
 
 
-#weatherInfo = database.weatherInfo
+#Oppretter sockets til hver av værestasjonene samt klienten 
 
 
 socketTCP = socket(AF_INET,SOCK_STREAM)
@@ -44,6 +44,7 @@ socketUDPOslo.bind(("localhost", 5562))
 
 
 
+#Lager metoder for å håndtere hver av socketsene ved hjelp av threading 
 
 def receive_information_UDP_Bergen():
     while True:
@@ -51,7 +52,6 @@ def receive_information_UDP_Bergen():
         decoded = weatherData.decode()
         print("Recieved" + decoded)
         with open("DATABERGEN.csv", "a") as data:
-            #csv.writer(data).writerow(decoded)
             data.write(decoded + "\n")
 def receive_information_UDP_Tromso():
     while True:
@@ -59,7 +59,6 @@ def receive_information_UDP_Tromso():
         decoded = weatherData.decode()
         print("Recieved" + decoded)
         with open("DATATROMSO.csv", "a") as data:
-            #csv.writer(data).writerow(decoded)
             decode = json.dumps(decoded)
             data.write(decode + "\n")
 def receive_information_UDP_Oslo():
@@ -68,7 +67,6 @@ def receive_information_UDP_Oslo():
         decoded = weatherData.decode()
         print("Recieved" + decoded)
         with open("DATAOSLO.csv", "a") as data:
-            #csv.writer(data).writerow(decoded)
             decode = json.dumps(decoded)
             data.write(decode + "\n")
 
@@ -78,25 +76,20 @@ def receive_information_client():
     print("[LISTENING] The server is listening on ...")
     conn, TCP_addr = socketTCP.accept()
     cities = ['OSLO', 'BERGEN', 'TROMSO']
-    DATA = []
+    DATA = [] 
 
     data = conn.recv(1024).decode()
     print(f'Received message from {TCP_addr}, message: {data}')
-    #conn.send(data.encode())
-    if(data in cities):
-        textfile = 'DATA' + str(data) + '.csv'
-        with open(textfile) as csv_file:
+    if(data in cities): #Sjekker om input fra bruker er i cities 
+        textfile = 'DATA' + str(data) + '.csv' #lager varabel som samsvarer med hvilken by bruker har valgt
+        with open(textfile) as csv_file: 
             csv_reader = csv.reader(csv_file, delimiter = '\n')
             for row in csv_reader:
                 DATA.append(row)
-                print(row)
                 obj = row[0]
                 obje = json.loads(obj)
-                print(obje)
-                collection.insert_one(obje)
-            
-        
-            conn.send(str(DATA).encode())
+                collection.insert_one(obje) #sender dict til MongoDB database
+            conn.send(str(DATA).encode()) #sender data fra værstasjonen til brukeren
     
 
 #Definerer threading for hver metode
