@@ -8,7 +8,7 @@ Tuva Kvalsøren
 
 
 
-STORAGE.py fungerer som serveren vår, og kjører værstasjon-simulasjonene i tre forskjellige tråder, paralellt ved hjelp av threading. 
+STORAGE.py fungerer som serveren vår, og kjører værstasjon-simulasjonene i tre forskjellige tråder, parallelt ved hjelp av threading. 
 I værstasjonene blir simulert data lagt til i de respektive txt-filene på formated 'Location, Month, Temperature, Rain'. 
 Værstasjonene er koblet til serveren med UDP-protokoll. 
 
