@@ -1,1 +1,3 @@
-{'LOCATION': ['Bergen'], 'MONTH': ['May'], 'TEMPERATURE': [0, 6.8, 6.74, 8.81, 10.4, 10.66, 8.49, 10.73, 12.07], 'RAIN': [0, 0, 0, 0, 0, 0, 0, 0, 0]}
+{"LOCATION": ["Bergen"], "MONTH": ["May"], "TEMPERATURE": [7.8, 7.14, 6.34, 8.57, 8.42], "RAIN": [0, 0, 0, 0, 0]}
+{"LOCATION": ["Bergen"], "MONTH": ["May"], "TEMPERATURE": [7.36, 7.52, 7.52, 4.39, 6.6], "RAIN": [0, 0, 0, 0, 0]}
+{"LOCATION": ["Bergen"], "MONTH": ["May"], "TEMPERATURE": [6.4, 8.79, 4.57, 9.1, 9.1], "RAIN": [0, 0, 0, 0, 0]}

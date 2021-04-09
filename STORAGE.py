@@ -44,16 +44,10 @@ socketUDPOslo.bind(("localhost", 5562))
 
 
 
-def handle_client(conn, addr):
-    print(f"[NEW CONNECTION] {addr} connected")
-    connected = True
-    while connected:
-        msg_length = conn.recv(64)
-    conn.close()
 
 def receive_information_UDP_Bergen():
     while True:
-        weatherData , UDP_adress = socketUDPBergen.recvfrom(2048)
+        weatherData , _ = socketUDPBergen.recvfrom(2048)
         decoded = weatherData.decode()
         print("Recieved" + decoded)
         with open("DATABERGEN.csv", "a") as data:
@@ -61,20 +55,22 @@ def receive_information_UDP_Bergen():
             data.write(decoded + "\n")
 def receive_information_UDP_Tromso():
     while True:
-        weatherData , UDP_adress = socketUDPTromso.recvfrom(2048)
+        weatherData , _ = socketUDPTromso.recvfrom(2048)
         decoded = weatherData.decode()
         print("Recieved" + decoded)
         with open("DATATROMSO.csv", "a") as data:
             #csv.writer(data).writerow(decoded)
-            data.write(decoded + "\n")
+            decode = json.dumps(decoded)
+            data.write(decode + "\n")
 def receive_information_UDP_Oslo():
     while True:
-        weatherData , UDP_adress = socketUDPOslo.recvfrom(2048)
+        weatherData , _ = socketUDPOslo.recvfrom(2048)
         decoded = weatherData.decode()
         print("Recieved" + decoded)
         with open("DATAOSLO.csv", "a") as data:
             #csv.writer(data).writerow(decoded)
-            data.write(decoded + "\n")
+            decode = json.dumps(decoded)
+            data.write(decode + "\n")
 
 
 def receive_information_client():

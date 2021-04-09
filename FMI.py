@@ -18,32 +18,32 @@ print(f'DISCONNECT : Disconnects from the server')
 
 DISCONNECT_MESSAGE = 'DISCONNECT'
 isConnected = True
-msg = str(input("Enter CITY: "))
-client.send(msg.encode())
-if (msg != DISCONNECT_MESSAGE):
-    #sends the location to the server
-    #msg = msg.encode("utf-8")
-        
-    while msg != DISCONNECT_MESSAGE:
-        try: 
-            msg = client.recv(2048) 
-        except: 
-            break
-        else: 
-            if msg: 
-                print('RECEIVING DATA: ')
-                decoded = msg.decode()
-                print("hello")
-                liste = ast.literal_eval(decoded)
-                print(liste)
-                #liste = json.loads(decoded)
-                for obj in liste:
-                    obje = json.loads(obj[0])
-                    print(obje)
-                    print(obje['RAIN'])
 
-            else: 
+while True:
+    msg = str(input("Enter CITY: "))
+    if(msg == False): break
+    client.send(msg.encode())
+    if (msg != DISCONNECT_MESSAGE):
+        #sends the location to the server
+        #msg = msg.encode("utf-8")
+            
+        while msg != DISCONNECT_MESSAGE:
+            try: 
+                msg = client.recv(2048) 
+            except: 
                 break
+            else: 
+                if msg: 
+                    print('RECEIVING DATA: ')
+                    decoded = msg.decode()
+                    liste = ast.literal_eval(decoded)
+
+                    for obj in liste:
+                        obje = json.loads(obj[0])
+                        print(obje['TEMPERATURE'])
+                        print(obje['RAIN'])
+                else: 
+                    break
 
             
             
