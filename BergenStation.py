@@ -164,6 +164,14 @@ class StationSimulator:
 
 
 if __name__ == "__main__":
+<<<<<<< HEAD
+=======
+    with open("DATABERGEN.txt", "a") as data:
+            List = ["Location,", "Month,", "Temperature,", "Rain"]
+            for obj in List:
+                data.write(str(obj))
+            data.write('\n')
+>>>>>>> c337f9220ecfcece053e3e73daf04de93b9c6134
     bergen_station = StationSimulator(simulation_interval=1)
     bergen_station.turn_on()
     location.append(bergen_station.location)
